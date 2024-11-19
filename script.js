@@ -30,3 +30,7 @@ function operate (firstNum, secondNum, operator){
             break;
     }
 }
+
+function populateDisplay (btn, display){
+    
+}

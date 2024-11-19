@@ -31,9 +31,12 @@ body {
 }
 
 #display {
+    display: flex;
+    align-items: center;
+    justify-content: right;
     color: white;
-    text-align: right;
     height: 15%;
+    font-size: 3em;
 
     border:  2px solid white;
 }
@@ -56,5 +59,6 @@ body {
     height: 100%;
     outline: solid yellow;
     border-radius: 500px;
+    font-size: 2em;
     
 }
