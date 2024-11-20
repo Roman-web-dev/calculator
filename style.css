@@ -1,64 +1,76 @@
 body {
-    background-color: black;
+    background-color: rgb(71, 70, 70);
 }
 
 #mainContainer {
     display: flex;
     justify-content: center;
-    height: 100%;
-
-    border:  2px solid red;
+    align-items: center;
+    height: 100vh;
 }
 
 #innerContainer {
+    box-sizing: border-box;
+    background-color: rgb(38, 38, 38);
     display: flex;
-    height: 100%;
     flex-direction: column;
-    border:  3px solid green;
-    width: 28%;
-    aspect-ratio: 1 / 1.5;
+    height: 90vh;
+    min-height: 375px;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+}
+
+#display {
+    display: flex;
+    align-items: flex-end;
+    justify-content: right;
+    color: white;
+    height: 30%;
+    font-size: 3em;
+    background-color: black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 #buttonsContainer {
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    height: 85%;
-
-    border:  2px solid white;
-}
-
-#display {
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    color: white;
-    height: 15%;
-    font-size: 3em;
-
-    border:  2px solid white;
+    height: 70%;
+    gap: 10px;
+    padding: 10px;
 }
 
 #buttonsContainer div {
-    display: flex;
-    justify-content: space-evenly;
-    height: 16%;
-    width: 100%;
-
-    /* outline: solid white; */
-}
-
-#buttonsContainer div div {
+    flex: 1 1 19%;
     display: flex;
     align-items: center;
-    justify-items: center;
-    color:white;
-    width: 20%;
-    height: 100%;
-    outline: solid yellow;
-    border-radius: 500px;
-    font-size: 2em;
-    
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 100px;
+    font-size: 2.3em;   
+}
+
+.numbers {
+    background-color: rgb(52, 52, 52);
+    color: white;
+}
+
+.modifiers {
+    background-color: rgb(165, 165, 165);
+    color: black;
+}
+
+.operations {
+    background-color: rgb(255, 149, 0);
+    color: white;
+}
+
+#buttonsContainer #btnZero {
+   min-width: 49.4%;
+   aspect-ratio: 1 / 0.3;
+   padding-left: 10%;
+   justify-content: flex-start;
+   box-sizing: border-box;
 }
