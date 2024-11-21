@@ -17,20 +17,25 @@ function divide (a, b){     //case 3
 function operate (firstNum, secondNum, operator){
     switch (operator){
         case 0:
-            add(firstNum, secondNum)
+            display.textContent = add(firstNum, secondNum)
             break;
         case 1:
-            substract(firstNum, secondNum)
+            display.textContent = substract(firstNum, secondNum)
             break;
         case 2:
-            multiply(firstNum, secondNum)
+            display.textContent = multiply(firstNum, secondNum)
             break;
         case 3:
-            divide(firstNum, secondNum)
+            display.textContent = divide(firstNum, secondNum)
             break;
     }
+    input = ""
 }
 
-function populateDisplay (btn, display){
-    
+let input = ""
+
+function populateDisplay (numBtn){
+    input += numBtn.toString()
+
+    display.textContent = input
 }
