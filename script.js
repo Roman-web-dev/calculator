@@ -1,6 +1,6 @@
 const numbers = document.querySelectorAll(".numbers")
 const operations = document.querySelectorAll(".operations")
-const display = document.querySelector("#display")
+const display = document.querySelector("#display div")
 
 numbers.forEach((number) => {
     number.addEventListener("click", (e) => {
