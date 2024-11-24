@@ -1,8 +1,28 @@
-const numbers = document.querySelectorAll(".numbers")
+// const numbers = document.querySelectorAll(".numbers")
 const operations = document.querySelectorAll(".operations")
 const display = document.querySelector("#display div")
 const buttons = document.querySelectorAll(".numbers, .modifiers")
 
+let operator
+let firstNum
+
+operations.forEach((operation) => {
+    operation.addEventListener("click", (e) => {
+        operations.forEach((op) => op.classList.remove("selected"));
+        operation.classList.add("selected");
+    })
+
+    operation.addEventListener("click", (e) => {
+        if (e.target.textContent === "=") {
+            operate(firstNum, input, operator)
+        } else {
+            operator = e.target.textContent
+            firstNum = input
+            input = ""
+        }
+        
+    })
+})
 
 buttons.forEach((button) => {
     button.addEventListener("mousedown", (e) => {       // Changes button brightness while clicking
@@ -29,7 +49,7 @@ buttons.forEach((number) => {
 
 // Math functions
 function add (a, b){        //case 0
-    return a + b
+    return Number(a) + Number(b)
 }
 
 function substract (a, b){  //case 1
@@ -50,19 +70,19 @@ function divide (a, b){     //case 3
 let operateResult = 0
 function operate (firstNum, secondNum, operator){
     switch (operator){
-        case 0:
+        case "+":
             operateResult = add(firstNum, secondNum)
             display.textContent = operateResult
             break;
-        case 1:
+        case "-":
             operateResult = substract(firstNum, secondNum)
             display.textContent = operateResult
             break;
-        case 2:
+        case "x":
             operateResult = multiply(firstNum, secondNum)
             display.textContent = operateResult
             break;
-        case 3:
+        case "/":
             operateResult = divide(firstNum, secondNum)
             display.textContent = operateResult
             break;
@@ -73,6 +93,9 @@ function operate (firstNum, secondNum, operator){
 let input = ""
 
 function populateDisplay (numBtn){
+    if (input === "0" && numBtn === "C") {
+        operations.forEach((op) => op.classList.remove("selected"));
+    }
     display.style.fontSize = "3.5rem";
     if (input === "0"){       // Removes 0 if it's the only digit
         input = ""

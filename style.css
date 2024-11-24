@@ -85,6 +85,11 @@ body {
     color: white;
 }
 
+.operations.selected {
+    background-color: white;
+    color: rgb(255, 149, 0);
+}
+
 #buttonsContainer #btnZero {
    display: flex;
    max-width: 47%;
