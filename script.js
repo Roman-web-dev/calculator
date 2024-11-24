@@ -3,16 +3,23 @@ const operations = document.querySelectorAll(".operations")
 const display = document.querySelector("#display div")
 const buttons = document.querySelectorAll(".numbers, .modifiers")
 
-// Changes button brightness while clicking
+
 buttons.forEach((button) => {
-    button.addEventListener("mousedown", (e) => {
+    button.addEventListener("mousedown", (e) => {       // Changes button brightness while clicking
         e.target.style.filter = "brightness(1.2)";
     });
 
     button.addEventListener("mouseup", (e) => {
         e.target.style.filter = "brightness(1)";
     });
-
+    
+    button.addEventListener("click", (e) => {       // Set input to 0
+        if (e.target.textContent === "C") {
+            input = "0"
+            display.textContent = input
+            display.style.fontSize = "3.5rem";
+        }
+    })
 })
 
 //Populates display
@@ -73,6 +80,9 @@ function operate (firstNum, secondNum, operator){
 let input = ""
 
 function populateDisplay (numBtn){
+    if (input === "0"){       // Removes 0 if it's the only digit
+        input = ""
+    }
     if (display.textContent.length < 9) {
         input += numBtn.toString()
     }
