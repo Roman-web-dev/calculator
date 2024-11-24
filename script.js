@@ -51,7 +51,22 @@ function operate (firstNum, secondNum, operator){
 let input = ""
 
 function populateDisplay (numBtn){
-    input += numBtn.toString()
+    if (display.textContent.length < 9) {
+        input += numBtn.toString()
+    }
+
+    switch(input.length) {
+        case 7:
+            display.style.fontSize = "3rem";
+            break 
+        case 8:
+            display.style.fontSize = "2.8rem";
+            break 
+        case 9:
+            display.style.fontSize = "2.6rem";
+            break 
+    }
+ 
 
     display.textContent = input
 }
