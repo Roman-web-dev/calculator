@@ -13,17 +13,10 @@ buttons.forEach((button) => {
         e.target.style.filter = "brightness(1)";
     });
     
-    button.addEventListener("click", (e) => {       // Set input to 0
-        if (e.target.textContent === "C") {
-            input = "0"
-            display.textContent = input
-            display.style.fontSize = "3.5rem";
-        }
-    })
 })
 
 //Populates display
-numbers.forEach((number) => {
+buttons.forEach((number) => {
     number.addEventListener("click", (e) => {
         if (input.includes(".") && e.target.textContent === ".") {  // Prevents multiple dots
             return;
@@ -80,11 +73,15 @@ function operate (firstNum, secondNum, operator){
 let input = ""
 
 function populateDisplay (numBtn){
+    display.style.fontSize = "3.5rem";
     if (input === "0"){       // Removes 0 if it's the only digit
         input = ""
     }
     if (display.textContent.length < 9) {
         input += numBtn.toString()
+    }
+    if (numBtn === "C") {
+        input = "0"
     }
 
     // Reduce display text size

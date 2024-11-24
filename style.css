@@ -87,7 +87,7 @@ body {
 
 #buttonsContainer #btnZero {
    display: flex;
-   max-width: 46.7%;
+   max-width: 47%;
    aspect-ratio: 1 / 0.3;
    justify-content: flex-start;
    align-items: center;
