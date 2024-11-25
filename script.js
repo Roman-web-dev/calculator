@@ -1,111 +1,57 @@
-// const numbers = document.querySelectorAll(".numbers")
+
 const operations = document.querySelectorAll(".operations")
 const display = document.querySelector("#display div")
-const buttons = document.querySelectorAll(".numbers, .modifiers")
+const numbers = document.querySelectorAll(".numbers")
+const modifiers = document.querySelectorAll(".modifiers")
 
 let operator
 let firstNum
+let input = ""
 
-operations.forEach((operation) => {
-    operation.addEventListener("click", (e) => {
-        operations.forEach((op) => op.classList.remove("selected"));
-        operation.classList.add("selected");
-    })
 
-    operation.addEventListener("click", (e) => {
-        if (e.target.textContent === "=") {
-            operate(firstNum, input, operator)
-        } else {
-            operator = e.target.textContent
-            firstNum = input
-            input = ""
-        }
-        
-    })
-})
 
-buttons.forEach((button) => {
-    button.addEventListener("mousedown", (e) => {       // Changes button brightness while clicking
-        e.target.style.filter = "brightness(1.2)";
-    });
-
-    button.addEventListener("mouseup", (e) => {
-        e.target.style.filter = "brightness(1)";
-    });
-    
-})
-
-//Populates display
-buttons.forEach((number) => {
-    number.addEventListener("click", (e) => {
-        if (input.includes(".") && e.target.textContent === ".") {  // Prevents multiple dots
-            return;
-        }
-
-        populateDisplay(e.target.textContent.trim())
-    
-    })
-})
 
 // Math functions
-function add (a, b){        //case 0
+function add (a, b){        
     return Number(a) + Number(b)
 }
 
-function substract (a, b){  //case 1
+function substract (a, b){  
     return a - b
 }
 
-function multiply (a, b){   //case 2
+function multiply (a, b){   
     return a * b
 }
 
-function divide (a, b){     //case 3
+function divide (a, b){     
     return a / b
 }
 
 
 
 // Main operational function
-let operateResult = 0
-function operate (firstNum, secondNum, operator){
+
+function operate (a, b, operator){
     switch (operator){
         case "+":
-            operateResult = add(firstNum, secondNum)
-            display.textContent = operateResult
-            break;
+            return add(a, b)
         case "-":
-            operateResult = substract(firstNum, secondNum)
-            display.textContent = operateResult
-            break;
+            return substract(a, b)
         case "x":
-            operateResult = multiply(firstNum, secondNum)
-            display.textContent = operateResult
-            break;
+            return multiply(a, b)
         case "/":
-            operateResult = divide(firstNum, secondNum)
-            display.textContent = operateResult
-            break;
+            return divide(a, b)
+        default:
+            return b
     }
-    input = ""
 }
 
-let input = ""
 
-function populateDisplay (numBtn){
-    if (input === "0" && numBtn === "C") {
-        operations.forEach((op) => op.classList.remove("selected"));
-    }
+
+function populateDisplay (input){
+    display.textContent = input
     display.style.fontSize = "3.5rem";
-    if (input === "0"){       // Removes 0 if it's the only digit
-        input = ""
-    }
-    if (display.textContent.length < 9) {
-        input += numBtn.toString()
-    }
-    if (numBtn === "C") {
-        input = "0"
-    }
 
     // Reduce display text size
     switch(input.length) {
@@ -119,7 +65,78 @@ function populateDisplay (numBtn){
             display.style.fontSize = "2.6rem";
             break 
     }
- 
-
-    display.textContent = input
 }
+
+function clearDisplay() {
+    input = "0"
+    operator = null
+    firstNum = null
+    populateDisplay(input)
+}
+
+numbers.forEach((number) => {
+    number.addEventListener("click", (e) => {
+        if (input.includes(".") && e.target.textContent === ".") {
+            return; // Prevents multiple dots
+        }
+        if (input === "0") {
+            input = "" //Removes 0 as a first digit
+        }
+        if (input.length < 9) {
+            input += e.target.textContent.trim()
+            populateDisplay(input)
+        }
+    })
+    
+    number.addEventListener("mousedown", (e) => {       // Changes button brightness while clicking
+        e.target.style.filter = "brightness(1.2)";
+    });
+
+    number.addEventListener("mouseup", (e) => {
+        e.target.style.filter = "brightness(1)";
+    });
+})
+
+operations.forEach((operation) => {
+    operation.addEventListener("click", (e) => {
+        let operationType = e.target.textContent.trim()      
+
+        if (operationType === "=") {
+            let result = operate(Number(firstNum), Number(input), operator)
+            populateDisplay(result.toString())
+            input = result.toString()
+            operator = null
+            firstNum = null
+        } else {
+            operator = operationType
+            firstNum = input
+            input = ""
+        }
+
+        operations.forEach((op) => op.classList.remove("selected"))
+        operation.classList.add("selected")
+    })
+})
+
+
+
+modifiers.forEach((button) => {
+    
+    button.addEventListener("click", (e) => {
+        let modifier = e.target.textContent.trim()
+
+        if (modifier === "C") {
+            clearDisplay()
+            operations.forEach((op) => op.classList.remove("selected"))
+        }
+    })
+    
+    button.addEventListener("mousedown", (e) => {       // Changes button brightness while clicking
+        e.target.style.filter = "brightness(1.2)";
+    });
+
+    button.addEventListener("mouseup", (e) => {
+        e.target.style.filter = "brightness(1)";
+    });
+})
+
